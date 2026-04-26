@@ -1,0 +1,3859 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nour al-Qur'an · L'apprentissage du Coran</title>
+<meta name="description" content="Application élégante pour apprendre le Coran : lecture, mémorisation, traduction française et compréhension.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Dancing+Script:wght@500;600;700&family=Amiri:wght@400;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&family=Lora:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose-poudre: #f5e8e0;
+  --rose-pale: #faf2ee;
+  --rose-clair: #fdf8f5;
+  --rose-vif: #d4b8a0;
+  --rose-fonce: #8a6a5a;
+  --creme: #fdfaf5;
+  --creme-fonce: #f7f0e3;
+  --or: #b89485;
+  --or-clair: #d4b8a0;
+  --or-fonce: #8a6a5a;
+  --ivoire: #ffffff;
+  --fond-page: #fefdfb;
+  --texte-principal: #2a2424;
+  --texte-doux: #6a5a55;
+  --texte-sous: #b89485;
+  --bordure-fine: rgba(180, 148, 133, 0.25);
+  --ombre-douce: 0 1px 3px rgba(138, 106, 90, 0.04);
+  --ombre-medium: 0 2px 8px rgba(138, 106, 90, 0.06);
+  --ombre-forte: 0 4px 16px rgba(138, 106, 90, 0.10);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: var(--fond-page);
+  color: var(--texte-principal);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  position: relative;
+  z-index: 10;
+  padding: 24px 5vw 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-bottom: 0.5px solid var(--bordure-fine);
+  margin-bottom: 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+}
+
+.logo-ornament {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--or);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: transparent;
+}
+
+.logo-ornament::before {
+  content: '';
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border: 0.5px solid var(--or-clair);
+  border-radius: 50%;
+}
+
+.logo-ornament span {
+  font-family: 'Amiri', serif;
+  font-size: 16px;
+  color: var(--or-fonce);
+  font-weight: 700;
+  z-index: 1;
+}
+
+.logo-text h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 26px;
+  color: var(--rose-fonce);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+.logo-text p {
+  font-size: 9px;
+  color: var(--texte-sous);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 4px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+nav {
+  display: flex;
+  gap: 28px;
+  align-items: center;
+}
+
+nav a {
+  color: var(--texte-doux);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: var(--transition);
+  position: relative;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+nav a:hover, nav a.active {
+  color: var(--texte-principal);
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 1px;
+  background: var(--or);
+  transition: var(--transition);
+}
+
+nav a:hover::after, nav a.active::after {
+  width: 100%;
+  left: 0;
+}
+
+/* HERO / ACCUEIL */
+.hero {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 60px 5vw 30px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.bismillah {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: clamp(24px, 3.5vw, 32px);
+  color: var(--or-fonce);
+  margin-bottom: 28px;
+  letter-spacing: 0;
+  direction: rtl;
+  font-weight: 700;
+  animation: fadeInUp 1s ease-out;
+}
+
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px auto;
+  color: var(--or);
+}
+
+.divider-ornament .line {
+  width: 50px;
+  height: 0.5px;
+  background: var(--or-clair);
+}
+
+.divider-ornament .symbol {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--or-clair);
+}
+
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(38px, 5.5vw, 56px);
+  color: var(--texte-principal);
+  font-weight: 400;
+  margin-bottom: 16px;
+  line-height: 1.15;
+  animation: fadeInUp 1.2s ease-out;
+}
+
+.hero h2 em {
+  color: var(--or-fonce);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.hero .subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(15px, 2vw, 17px);
+  color: var(--texte-doux);
+  margin-bottom: 32px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.7;
+  animation: fadeInUp 1.4s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTIONS */
+section {
+  position: relative;
+  z-index: 5;
+  padding: 24px 5vw 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.section-title h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px;
+  color: var(--texte-principal);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.section-title p {
+  font-style: italic;
+  color: var(--texte-doux);
+  font-size: 14px;
+  margin-top: 6px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* CARTES DE FONCTIONNALITÉS */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.feature-card {
+  background: var(--ivoire);
+  border: 0.5px solid var(--or-clair);
+  border-radius: 4px;
+  padding: 30px 24px;
+  text-align: center;
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.feature-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--or-fonce);
+  box-shadow: var(--ombre-medium);
+}
+
+.feature-card .feature-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--or);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+
+.feature-icon {
+  display: none;
+}
+
+.feature-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: var(--texte-principal);
+  margin-bottom: 8px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.feature-card p {
+  font-size: 13px;
+  color: var(--texte-doux);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* GRILLE DES SOURATES */
+.surahs-section {
+  display: none;
+}
+
+.surahs-section.active {
+  display: block;
+}
+
+.search-bar {
+  max-width: 460px;
+  margin: 0 auto 28px;
+  position: relative;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 12px 24px 12px 44px;
+  border: 0.5px solid var(--or-clair);
+  border-radius: 4px;
+  background: var(--ivoire);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: var(--texte-principal);
+  transition: var(--transition);
+}
+
+.search-bar input:focus {
+  outline: none;
+  border-color: var(--or-fonce);
+}
+
+.search-bar::before {
+  content: '⚲';
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  color: var(--or);
+  font-size: 16px;
+}
+
+.surahs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.surah-card {
+  background: var(--ivoire);
+  padding: 18px 16px;
+  border: 0.5px solid var(--or-clair);
+  border-radius: 4px;
+  transition: var(--transition);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.surah-card:hover {
+  border-color: var(--or-fonce);
+  background: var(--rose-clair);
+}
+
+.surah-number {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--or);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.surah-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 24px;
+  color: var(--texte-principal);
+  direction: rtl;
+  margin: 4px 0 2px;
+  line-height: 1.4;
+}
+
+.surah-info {
+  width: 100%;
+  min-width: 0;
+}
+
+.surah-info h4 {
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  color: var(--texte-principal);
+  font-weight: 500;
+  margin-bottom: 2px;
+  letter-spacing: 0.3px;
+}
+
+.surah-info .french-name {
+  font-style: italic;
+  font-size: 12px;
+  color: var(--texte-doux);
+  font-family: 'Cormorant Garamond', serif;
+  display: none;
+}
+
+.surah-info .meta {
+  font-size: 11px;
+  color: var(--texte-sous);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  margin-top: 0;
+}
+
+/* LECTEUR DE SOURATE */
+.surah-reader {
+  display: none;
+}
+
+.surah-reader.active {
+  display: block;
+}
+
+.reader-header {
+  background: var(--ivoire);
+  border-radius: 4px;
+  padding: 36px 24px;
+  margin-bottom: 22px;
+  border: 0.5px solid var(--bordure-fine);
+  text-align: center;
+  position: relative;
+}
+
+.back-button {
+  background: transparent;
+  border: 0.5px solid var(--or);
+  color: var(--or-fonce);
+  padding: 6px 18px;
+  border-radius: 2px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 18px;
+}
+
+.back-button:hover {
+  background: var(--or);
+  color: white;
+}
+
+.reader-header .surah-arabic-large {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 38px;
+  color: var(--texte-principal);
+  margin-bottom: 6px;
+  direction: rtl;
+  font-weight: 700;
+}
+
+.reader-header .surah-name-french {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: var(--or-fonce);
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.reader-header .surah-translation {
+  font-style: italic;
+  color: var(--texte-doux);
+  margin: 4px 0 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+}
+
+.reader-header .surah-meta {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 10px;
+  color: var(--texte-sous);
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.reader-header .surah-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* LECTEUR AUDIO */
+.audio-player {
+  background: var(--ivoire);
+  border-radius: 4px;
+  padding: 16px 22px;
+  margin-bottom: 20px;
+  border: 0.5px solid var(--bordure-fine);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.play-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--texte-principal);
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.play-btn:hover {
+  background: var(--or-fonce);
+  transform: scale(1.05);
+}
+
+.audio-info {
+  flex: 1;
+  min-width: 200px;
+}
+
+.audio-info .reciter-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  color: var(--texte-principal);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.audio-info .reciter-label {
+  font-size: 10px;
+  color: var(--texte-sous);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+}
+
+.audio-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.reciter-select {
+  background: var(--ivoire);
+  border: 0.5px solid var(--or-clair);
+  border-radius: 2px;
+  padding: 6px 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--texte-principal);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.reciter-select:hover {
+  border-color: var(--or-fonce);
+}
+
+/* VERSETS */
+.verses-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.verse {
+  background: var(--ivoire);
+  border-radius: 4px;
+  padding: 22px 24px;
+  border: 0.5px solid var(--bordure-fine);
+  transition: var(--transition);
+  position: relative;
+}
+
+.verse:hover {
+  border-color: var(--or-clair);
+}
+
+.verse.playing {
+  background: var(--rose-clair);
+  border-color: var(--or);
+}
+
+.verse-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid var(--bordure-fine);
+}
+
+.verse-number {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--or);
+  background: transparent;
+  border: none;
+  width: auto;
+  height: auto;
+}
+
+.verse-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.verse-action {
+  width: 28px;
+  height: 28px;
+  border-radius: 2px;
+  border: 0.5px solid transparent;
+  background: var(--rose-clair);
+  color: var(--or-fonce);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+.verse-action:hover {
+  background: var(--rose-pale);
+  border-color: var(--or-clair);
+}
+
+.verse-action.active {
+  background: var(--or-fonce);
+  color: white;
+}
+
+.verse-arabic {
+  font-family: 'Amiri', serif;
+  font-size: 26px;
+  line-height: 2.2;
+  color: var(--texte-principal);
+  text-align: right;
+  direction: rtl;
+  margin-bottom: 14px;
+}
+
+.verse-translation {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--texte-doux);
+  line-height: 1.7;
+  font-style: italic;
+}
+
+/* ÉTATS DE CHARGEMENT */
+.loader {
+  text-align: center;
+  padding: 48px;
+  color: var(--texte-doux);
+  font-style: italic;
+  font-size: 18px;
+}
+
+.loader::before {
+  content: '✦';
+  display: block;
+  font-size: 32px;
+  color: var(--or);
+  margin-bottom: 12px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+/* TAFSIR */
+.tafsir-panel {
+  margin-top: 16px;
+  padding: 0;
+  background: linear-gradient(135deg, var(--creme), var(--rose-clair));
+  border-radius: 16px;
+  border: 1px solid var(--or-clair);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease;
+}
+
+.tafsir-panel.open {
+  max-height: 2000px;
+  opacity: 1;
+  padding: 20px 24px;
+  margin-top: 16px;
+}
+
+.tafsir-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--or-clair);
+}
+
+.tafsir-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--or-fonce);
+  font-weight: 600;
+}
+
+.tafsir-title::before {
+  content: '✦';
+  color: var(--or);
+  font-size: 14px;
+}
+
+.tafsir-lang-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--ivoire);
+  padding: 3px;
+  border-radius: 100px;
+  border: 1px solid var(--or-clair);
+}
+
+.tafsir-lang-toggle button {
+  background: transparent;
+  border: none;
+  padding: 5px 14px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.tafsir-lang-toggle button.active {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  box-shadow: 0 2px 8px rgba(217, 154, 154, 0.3);
+}
+
+.tafsir-content {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--texte-principal);
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.tafsir-content[dir="rtl"] {
+  font-family: 'Amiri', serif;
+  font-size: 18px;
+  line-height: 2.2;
+  text-align: right;
+}
+
+.tafsir-content h2,
+.tafsir-content h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 20px;
+  color: var(--rose-fonce);
+  font-weight: 600;
+  margin: 16px 0 8px;
+}
+
+.tafsir-content[dir="rtl"] h2,
+.tafsir-content[dir="rtl"] h3 {
+  font-family: 'Amiri', serif;
+  font-weight: 700;
+}
+
+.tafsir-content p {
+  margin-bottom: 12px;
+}
+
+.tafsir-loader {
+  text-align: center;
+  padding: 24px;
+  color: var(--texte-doux);
+  font-style: italic;
+}
+
+.tafsir-loader::before {
+  content: '✦';
+  display: block;
+  font-size: 24px;
+  color: var(--or);
+  margin-bottom: 8px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.tafsir-empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--texte-doux);
+  font-style: italic;
+  font-size: 15px;
+}
+
+.verse-action.tafsir-active {
+  background: var(--or);
+  color: white;
+}
+
+/* BASMALA EN-TÊTE (extraite du verset 1) - Option C : ornements autour */
+.basmala-header {
+  margin: 24px auto 0;
+  max-width: 600px;
+  padding: 16px 0;
+  text-align: center;
+  background: transparent;
+  border: none;
+}
+
+.basmala-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.basmala-ornament {
+  color: var(--or);
+  font-size: 12px;
+  letter-spacing: 6px;
+  white-space: nowrap;
+}
+
+.basmala-arabic {
+  font-family: 'Aref Ruqaa', serif;
+  font-size: 32px;
+  color: var(--or-fonce);
+  direction: rtl;
+  line-height: 1.5;
+  font-weight: 700;
+  padding: 0 4px;
+}
+
+.basmala-french {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--texte-doux);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* SURAH INFO (À propos de cette sourate) */
+.surah-info-section {
+  background: var(--ivoire);
+  border-radius: 20px;
+  padding: 0;
+  margin-bottom: 24px;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  box-shadow: var(--ombre-douce);
+  overflow: hidden;
+}
+
+.surah-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.surah-info-header:hover {
+  background: var(--rose-clair);
+}
+
+.surah-info-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  color: var(--texte-principal);
+  font-weight: 600;
+}
+
+.surah-info-title::before {
+  content: '✦';
+  color: var(--or);
+}
+
+.lang-badge {
+  background: var(--or-clair);
+  color: var(--or-fonce);
+  padding: 2px 8px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  font-weight: 500;
+}
+
+.surah-info-toggle {
+  font-size: 18px;
+  color: var(--rose-fonce);
+  transition: transform 0.4s ease;
+}
+
+.surah-info-section.open .surah-info-toggle {
+  transform: rotate(180deg);
+}
+
+.surah-info-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.surah-info-section.open .surah-info-content {
+  max-height: 5000px;
+}
+
+.surah-info-body {
+  padding: 0 24px 24px;
+  border-top: 1px solid var(--rose-pale);
+  padding-top: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: var(--texte-principal);
+}
+
+.surah-info-body h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  color: var(--rose-fonce);
+  margin: 16px 0 8px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.surah-info-body h2:first-child {
+  margin-top: 0;
+}
+
+.surah-info-body p {
+  margin-bottom: 12px;
+}
+
+.surah-info-body a {
+  color: var(--or-fonce);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--or);
+}
+
+.surah-info-body ol, .surah-info-body ul {
+  margin: 8px 0 12px 24px;
+}
+
+.surah-info-body li {
+  margin-bottom: 8px;
+}
+
+/* HIGHLIGHT MOT PAR MOT */
+.word-highlighted {
+  background: linear-gradient(135deg, var(--or-clair), var(--rose-poudre));
+  padding: 2px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(201, 169, 110, 0.3);
+}
+
+.verse-arabic .word {
+  display: inline-block;
+  padding: 2px 0;
+  margin: 0 2px;
+  transition: background 0.2s ease;
+}
+
+/* MODE TOGGLE (Compréhension / Mémorisation) */
+.mode-toggle-container {
+  background: var(--ivoire);
+  border-radius: 100px;
+  padding: 4px;
+  border: 1px solid var(--or-clair);
+  display: inline-flex;
+  gap: 4px;
+  margin: 0 auto 24px;
+  box-shadow: var(--ombre-douce);
+}
+
+.mode-toggle-wrapper {
+  text-align: center;
+}
+
+.mode-toggle-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mode-toggle-btn.active {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  box-shadow: 0 2px 12px rgba(217, 154, 154, 0.4);
+}
+
+.mode-toggle-btn .icon {
+  font-size: 14px;
+}
+
+/* MODE BADGE (rappel du mode actuel) */
+.mode-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--rose-clair);
+  color: var(--rose-fonce);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: 1px solid var(--rose-poudre);
+}
+
+/* BOUTONS MASQUER (œil) en mode Mémorisation */
+.hide-controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.hide-btn {
+  background: var(--rose-clair);
+  border: 1px solid transparent;
+  color: var(--rose-fonce);
+  padding: 6px 12px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hide-btn:hover {
+  background: var(--rose-poudre);
+  border-color: var(--or-clair);
+}
+
+.hide-btn.active {
+  background: var(--rose-vif);
+  color: white;
+  border-color: var(--rose-fonce);
+}
+
+.hide-btn .eye {
+  font-size: 14px;
+}
+
+/* TEXTE MASQUÉ */
+.text-hidden {
+  filter: blur(8px);
+  user-select: none;
+  cursor: pointer;
+  transition: filter 0.3s ease;
+  position: relative;
+}
+
+.text-hidden:hover {
+  filter: blur(4px);
+}
+
+.text-hidden::after {
+  content: '👁 Cliquer pour révéler';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--ivoire);
+  color: var(--texte-doux);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  filter: none;
+  pointer-events: none;
+  white-space: nowrap;
+  border: 1px solid var(--or-clair);
+}
+
+.text-revealed {
+  filter: none !important;
+}
+
+/* CASE MÉMORISÉ */
+.memorized-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: var(--creme);
+  border: 1px solid var(--or-clair);
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  transition: var(--transition);
+  user-select: none;
+}
+
+.memorized-check:hover {
+  background: var(--rose-clair);
+}
+
+.memorized-check.checked {
+  background: linear-gradient(135deg, #d4e8d4, #a8d4a8);
+  color: #2e5e2e;
+  border-color: #6fb86f;
+}
+
+.memorized-check .check-mark {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  background: white;
+}
+
+.memorized-check.checked .check-mark {
+  background: #2e5e2e;
+  color: white;
+  border-color: #2e5e2e;
+}
+
+/* SOURATE TERMINÉE - célébration */
+.celebration-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(74, 56, 56, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInOverlay 0.5s ease-out;
+}
+
+@keyframes fadeInOverlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.celebration-card {
+  background: linear-gradient(135deg, var(--ivoire), var(--rose-clair));
+  border: 2px solid var(--or);
+  border-radius: 32px;
+  padding: 48px 40px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.5s ease-out;
+  position: relative;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.celebration-card .stars {
+  font-size: 48px;
+  margin-bottom: 16px;
+  letter-spacing: 8px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.celebration-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 42px;
+  color: var(--rose-fonce);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.celebration-card .surah-name {
+  font-family: 'Cinzel', serif;
+  font-size: 18px;
+  color: var(--or-fonce);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.celebration-card .message {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--texte-principal);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.celebration-card .close-btn {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(217, 154, 154, 0.3);
+}
+
+.celebration-card .close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(217, 154, 154, 0.5);
+}
+
+/* INTRO SOURATE dans le tafsir */
+.tafsir-intro-btn {
+  background: linear-gradient(135deg, var(--creme), var(--rose-pale));
+  border: 1px solid var(--or-clair);
+  color: var(--or-fonce);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tafsir-intro-btn:hover {
+  background: var(--or-clair);
+  color: white;
+}
+
+.tafsir-intro-content {
+  background: var(--ivoire);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid var(--or-clair);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--texte-principal);
+  max-height: 350px;
+  overflow-y: auto;
+  display: none;
+}
+
+.tafsir-intro-content.open {
+  display: block;
+}
+
+.tafsir-intro-content h2 {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  color: var(--rose-fonce);
+  margin: 14px 0 6px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.tafsir-intro-content h2:first-child {
+  margin-top: 0;
+}
+
+.tafsir-intro-content p {
+  margin-bottom: 10px;
+}
+
+.tafsir-intro-content a {
+  color: var(--or-fonce);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--or);
+}
+
+.tafsir-intro-content ol, .tafsir-intro-content ul {
+  margin: 6px 0 10px 20px;
+}
+
+.tafsir-intro-content li {
+  margin-bottom: 6px;
+}
+
+/* PROGRESSION - Stats globales */
+.progression-stats {
+  background: linear-gradient(135deg, var(--ivoire), var(--rose-clair));
+  border-radius: 24px;
+  padding: 28px;
+  border: 1px solid var(--or-clair);
+  text-align: center;
+  margin-bottom: 32px;
+  box-shadow: var(--ombre-medium);
+}
+
+.progression-stats .number {
+  font-family: 'Cinzel', serif;
+  font-size: 48px;
+  color: var(--rose-fonce);
+  letter-spacing: 4px;
+  font-weight: 600;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.progression-stats .label {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--texte-doux);
+  font-size: 16px;
+}
+
+.progression-stats .progress-bar {
+  height: 8px;
+  background: var(--rose-clair);
+  border-radius: 100px;
+  margin: 16px auto 0;
+  max-width: 360px;
+  overflow: hidden;
+  border: 1px solid var(--or-clair);
+}
+
+.progression-stats .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--or-clair), var(--rose-vif));
+  border-radius: 100px;
+  transition: width 0.6s ease;
+}
+
+/* PROGRESSION - sous-onglets */
+.progression-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--ivoire);
+  padding: 4px;
+  border-radius: 100px;
+  border: 1px solid var(--or-clair);
+  margin: 0 auto 24px;
+  width: fit-content;
+  box-shadow: var(--ombre-douce);
+}
+
+.progression-tab {
+  background: transparent;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.progression-tab.active {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  box-shadow: 0 2px 12px rgba(217, 154, 154, 0.3);
+}
+
+.progression-section {
+  display: none;
+}
+
+.progression-section.active {
+  display: block;
+}
+
+/* PROGRESSION - To-do */
+.todo-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.todo-category {
+  background: var(--ivoire);
+  border-radius: 20px;
+  padding: 20px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rose-pale);
+}
+
+.todo-category-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--rose-pale), var(--rose-poudre));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rose-fonce);
+  font-size: 14px;
+}
+
+.todo-category-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--texte-principal);
+  flex: 1;
+}
+
+.todo-category-count {
+  background: var(--rose-clair);
+  color: var(--rose-fonce);
+  padding: 2px 10px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+  min-height: 40px;
+}
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--creme);
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: var(--transition);
+}
+
+.todo-item:hover {
+  border-color: var(--or-clair);
+}
+
+.todo-item.done {
+  opacity: 0.55;
+}
+
+.todo-item.done .todo-text {
+  text-decoration: line-through;
+}
+
+.todo-item-check {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--or);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  margin-top: 2px;
+  transition: var(--transition);
+}
+
+.todo-item.done .todo-item-check {
+  background: var(--or);
+  color: white;
+}
+
+.todo-item-check::after {
+  content: '✓';
+  color: white;
+  font-size: 12px;
+  display: none;
+}
+
+.todo-item.done .todo-item-check::after {
+  display: block;
+}
+
+.todo-text {
+  flex: 1;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--texte-principal);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.todo-delete {
+  background: transparent;
+  border: none;
+  color: var(--texte-sous);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0 4px;
+  transition: var(--transition);
+}
+
+.todo-delete:hover {
+  color: var(--rose-fonce);
+}
+
+.todo-add-form {
+  display: flex;
+  gap: 6px;
+}
+
+.todo-add-input {
+  flex: 1;
+  padding: 8px 14px;
+  border: 1px solid var(--or-clair);
+  border-radius: 100px;
+  background: var(--creme);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  color: var(--texte-principal);
+  transition: var(--transition);
+}
+
+.todo-add-input:focus {
+  outline: none;
+  border-color: var(--or);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+}
+
+.todo-add-btn {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  border: none;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.todo-add-btn:hover {
+  transform: scale(1.08);
+}
+
+/* SOURATES MÉMORISÉES - Liste dépliable */
+.memorized-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.memorized-card {
+  background: var(--ivoire);
+  border-radius: 18px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.memorized-card:hover {
+  border-color: var(--or-clair);
+  box-shadow: var(--ombre-medium);
+}
+
+.memorized-card.complete {
+  background: linear-gradient(135deg, #f4f9f4, #e8f5e8);
+  border-color: #6fb86f;
+}
+
+.memorized-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px;
+  cursor: pointer;
+}
+
+.memorized-card-info {
+  flex: 1;
+}
+
+.memorized-card-name {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--texte-principal);
+}
+
+.memorized-card-sub {
+  font-size: 12px;
+  color: var(--texte-doux);
+  font-family: 'Inter', sans-serif;
+  margin-top: 2px;
+}
+
+.memorized-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.memorized-card-percent {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  color: var(--or-fonce);
+  font-weight: 600;
+}
+
+.memorized-card.complete .memorized-card-percent {
+  color: #2e5e2e;
+}
+
+.memorized-card-arrow {
+  color: var(--rose-fonce);
+  font-size: 18px;
+  transition: transform 0.4s ease;
+  display: inline-block;
+}
+
+.memorized-card-bar {
+  height: 5px;
+  background: var(--rose-clair);
+  margin: 0 20px 12px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.memorized-card-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--or-clair), var(--rose-vif));
+  transition: width 0.6s ease;
+}
+
+.memorized-card.complete .memorized-card-bar-fill {
+  background: linear-gradient(90deg, #6fb86f, #2e5e2e);
+}
+
+.memorized-card-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+
+.memorized-card-detail.open {
+  max-height: 1500px;
+}
+
+.memorized-detail-content {
+  padding: 0 20px 20px;
+  border-top: 1px solid var(--rose-pale);
+  padding-top: 14px;
+}
+
+.memorized-detail-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texte-doux);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+
+.memorized-verses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.verse-pill {
+  background: var(--rose-clair);
+  color: var(--rose-fonce);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--or-clair);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.verse-pill:hover {
+  background: var(--rose-poudre);
+  transform: scale(1.05);
+}
+
+.memorized-card.complete .verse-pill {
+  background: #d4e8d4;
+  color: #2e5e2e;
+  border-color: #6fb86f;
+}
+
+.open-surah-link {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(217, 154, 154, 0.3);
+}
+
+.open-surah-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(217, 154, 154, 0.5);
+}
+
+/* CALENDRIER HEBDOMADAIRE */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.calendar-week-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--texte-doux);
+}
+
+.calendar-add-btn {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(217, 154, 154, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendar-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(217, 154, 154, 0.5);
+}
+
+.calendar-grid {
+  background: var(--ivoire);
+  border-radius: 20px;
+  border: 1px solid var(--or-clair);
+  overflow-x: auto;
+  box-shadow: var(--ombre-douce);
+}
+
+.calendar-table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.calendar-table th {
+  background: linear-gradient(135deg, var(--ivoire), var(--rose-clair));
+  padding: 14px 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--rose-fonce);
+  border-bottom: 1px solid var(--or-clair);
+  font-weight: 600;
+}
+
+.calendar-table th.today-col {
+  background: linear-gradient(135deg, var(--rose-poudre), var(--rose-clair));
+  color: var(--rose-fonce);
+  position: relative;
+}
+
+.calendar-table th.today-col::after {
+  content: 'Aujourd\'hui';
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: lowercase;
+  color: var(--rose-fonce);
+  margin-top: 2px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.calendar-table th.hour-col {
+  width: 70px;
+  text-align: center;
+}
+
+.calendar-table td {
+  border-bottom: 1px solid var(--rose-pale);
+  border-right: 1px solid var(--rose-pale);
+  height: 40px;
+  vertical-align: top;
+  position: relative;
+  padding: 2px;
+}
+
+.calendar-table td.hour-cell {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--texte-sous);
+  text-align: center;
+  vertical-align: top;
+  padding-top: 4px;
+  background: var(--creme);
+  letter-spacing: 0.5px;
+}
+
+.calendar-table td.day-cell {
+  cursor: cell;
+  transition: background 0.2s ease;
+}
+
+.calendar-table td.day-cell:hover {
+  background: var(--rose-clair);
+}
+
+.calendar-event {
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  background: linear-gradient(135deg, var(--rose-pale), var(--rose-poudre));
+  border: 1px solid var(--or-clair);
+  border-left: 3px solid var(--rose-fonce);
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 12px;
+  color: var(--texte-principal);
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+  transition: var(--transition);
+  line-height: 1.3;
+}
+
+.calendar-event:hover {
+  background: linear-gradient(135deg, var(--rose-poudre), var(--rose-vif));
+  color: white;
+  border-color: var(--rose-fonce);
+  z-index: 5;
+  box-shadow: 0 4px 12px rgba(217, 154, 154, 0.4);
+}
+
+.calendar-event-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.calendar-event-meta {
+  font-size: 10px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* MODALE - création/édition de créneau */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(74, 56, 56, 0.5);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeInOverlay 0.3s ease-out;
+}
+
+.modal-card {
+  background: var(--ivoire);
+  border: 1px solid var(--or-clair);
+  border-radius: 28px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  animation: scaleIn 0.3s ease-out;
+}
+
+.modal-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 30px;
+  color: var(--rose-fonce);
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.form-field {
+  margin-bottom: 14px;
+}
+
+.form-field label {
+  display: block;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--texte-doux);
+  margin-bottom: 6px;
+}
+
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--or-clair);
+  border-radius: 12px;
+  background: var(--creme);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  color: var(--texte-principal);
+  transition: var(--transition);
+}
+
+.form-field textarea {
+  min-height: 70px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  outline: none;
+  border-color: var(--or);
+  box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+  background: white;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.modal-btn {
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+}
+
+.modal-btn-primary {
+  background: linear-gradient(135deg, var(--rose-vif), var(--rose-fonce));
+  color: white;
+  box-shadow: 0 4px 16px rgba(217, 154, 154, 0.3);
+}
+
+.modal-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 154, 154, 0.5);
+}
+
+.modal-btn-secondary {
+  background: var(--creme);
+  color: var(--texte-doux);
+  border: 1px solid var(--or-clair);
+}
+
+.modal-btn-secondary:hover {
+  background: var(--rose-clair);
+}
+
+.modal-btn-danger {
+  background: transparent;
+  color: var(--rose-fonce);
+  border: 1px solid var(--rose-pale);
+  margin-right: auto;
+}
+
+.modal-btn-danger:hover {
+  background: var(--rose-clair);
+  border-color: var(--rose-fonce);
+}
+
+/* FAVORIS regroupés par sourate */
+.fav-group {
+  background: var(--ivoire);
+  border-radius: 20px;
+  border: 1px solid rgba(201, 169, 110, 0.2);
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: var(--ombre-douce);
+}
+
+.fav-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 22px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.fav-group-header:hover {
+  background: var(--rose-clair);
+}
+
+.fav-group-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fav-group-num {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--rose-pale), var(--creme));
+  border: 1px solid var(--or-clair);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: var(--or-fonce);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.fav-group-name {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--texte-principal);
+}
+
+.fav-group-count {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: var(--texte-doux);
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+
+.fav-group-arrow {
+  font-size: 18px;
+  color: var(--rose-fonce);
+  transition: transform 0.4s ease;
+}
+
+.fav-group-arrow.open {
+  transform: rotate(180deg);
+}
+
+.fav-group-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  border-top: 1px solid var(--rose-pale);
+}
+
+.fav-group-content.open {
+  max-height: 8000px;
+}
+
+.fav-group-verses {
+  padding: 12px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* FAVORIS */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--texte-doux);
+}
+
+.empty-state .icon {
+  font-size: 48px;
+  color: var(--or-clair);
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-style: italic;
+  font-size: 18px;
+}
+
+/* FOOTER */
+footer {
+  display: none;
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  padding: 40px 20px 32px;
+  color: var(--texte-doux);
+  font-size: 12px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  letter-spacing: 0.3px;
+  margin-top: 40px;
+  border-top: 0.5px solid var(--bordure-fine);
+}
+
+body.show-footer footer {
+  display: block;
+}
+
+footer .heart {
+  color: var(--rose-fonce);
+  display: inline-block;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+footer .signature {
+  font-family: 'Dancing Script', cursive;
+  font-size: 18px;
+  color: var(--rose-fonce);
+  margin-top: 8px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  header { padding: 20px 4vw 12px; }
+  nav { gap: 16px; }
+  nav a { font-size: 11px; letter-spacing: 1px; }
+  .hero { padding: 32px 4vw 24px; }
+  section { padding: 16px 4vw 24px; }
+  .verse-arabic { font-size: 22px; }
+  .verse { padding: 20px; }
+  .reader-header { padding: 24px 16px; }
+  .reader-header .surah-arabic-large { font-size: 32px; }
+  .audio-player { flex-direction: column; align-items: stretch; }
+  .audio-controls { justify-content: center; }
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--creme); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--rose-poudre), var(--or-clair));
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--rose-vif); }
+
+/* NOTIFICATION */
+.notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: linear-gradient(135deg, var(--ivoire), var(--rose-clair));
+  border: 1px solid var(--or);
+  border-radius: 16px;
+  padding: 16px 24px;
+  box-shadow: var(--ombre-forte);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  color: var(--texte-principal);
+  z-index: 1000;
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(120%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.notification.hide {
+  animation: slideOut 0.4s ease-in forwards;
+}
+
+@keyframes slideOut {
+  to { transform: translateX(120%); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" onclick="showSection('home')">
+    <div class="logo-ornament"><span>ن</span></div>
+    <div class="logo-text">
+      <h1>Nour al-Qur'an</h1>
+      <p>Lumière du Cœur</p>
+    </div>
+  </div>
+  <nav>
+    <a onclick="showSection('home')" class="nav-link active" data-section="home">Accueil</a>
+    <a onclick="showSection('surahs')" class="nav-link" data-section="surahs">Sourates</a>
+    <a onclick="showSection('progression')" class="nav-link" data-section="progression">Progression</a>
+    <a onclick="showSection('favorites')" class="nav-link" data-section="favorites">Favoris</a>
+  </nav>
+</header>
+
+<!-- ACCUEIL -->
+<div id="home-section">
+  <section class="hero">
+    <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <div class="divider-ornament">
+      <span class="line"></span>
+      <span class="symbol">✦ ❀ ✦</span>
+      <span class="line"></span>
+    </div>
+    <h2>Bienvenue, ma sœur</h2>
+    <p class="subtitle">« Et certes, Nous avons rendu le Coran facile pour la méditation. Y a-t-il quelqu'un pour réfléchir ? » <br>— Sourate Al-Qamar, verset 17</p>
+  </section>
+
+  <section>
+    <div class="section-title">
+      <h3>Choisis ton chemin</h3>
+      <p>Deux voies douces pour t'accompagner</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card" onclick="selectModeAndGo('comprehension')">
+        <div class="feature-label">— I —</div>
+        <h4>Compréhension</h4>
+        <p>Découvre le sens des versets avec la traduction française et le tafsir d'Ibn Kathir et Al-Mukhtasar.</p>
+      </div>
+      <div class="feature-card" onclick="selectModeAndGo('memorization')">
+        <div class="feature-label">— II —</div>
+        <h4>Mémorisation</h4>
+        <p>Apprends et révise les sourates avec l'audio synchronisé, la répétition et le suivi de progression.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- LISTE DES SOURATES -->
+<section id="surahs-section" class="surahs-section">
+  <div class="section-title">
+    <h3>Les 114 Sourates</h3>
+    <p>Choisis celle que ton cœur souhaite découvrir</p>
+  </div>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Rechercher une sourate..." oninput="filterSurahs()">
+  </div>
+  <div id="surahsGrid" class="surahs-grid">
+    <div class="loader">Chargement des sourates...</div>
+  </div>
+</section>
+
+<!-- LECTEUR DE SOURATE -->
+<section id="reader-section" class="surah-reader">
+  <div id="readerContent"></div>
+</section>
+
+<!-- PROGRESSION -->
+<section id="progression-section" class="surahs-section">
+  <div class="section-title">
+    <h3>Mon Suivi d'Apprentissage</h3>
+    <p>Cultive ton chemin avec patience et constance</p>
+  </div>
+
+  <div style="display: flex; justify-content: center;">
+    <div class="progression-tabs">
+      <button class="progression-tab active" data-progtab="memorized" onclick="switchProgTab('memorized')">Sourates</button>
+      <button class="progression-tab" data-progtab="todo" onclick="switchProgTab('todo')">À faire</button>
+      <button class="progression-tab" data-progtab="semainier" onclick="switchProgTab('semainier')">Semainier</button>
+    </div>
+  </div>
+
+  <div id="progSection-memorized" class="progression-section active"></div>
+  <div id="progSection-todo" class="progression-section"></div>
+  <div id="progSection-semainier" class="progression-section"></div>
+</section>
+
+<!-- FAVORIS -->
+<section id="favorites-section" class="surahs-section">
+  <div class="section-title">
+    <h3>Mes Favoris</h3>
+    <p>Tes versets précieux, gardés près de ton cœur</p>
+  </div>
+  <div id="favoritesContent"></div>
+</section>
+
+<footer>
+  <div class="divider-ornament">
+    <span class="line"></span>
+    <span class="symbol">✦ ❀ ✦</span>
+    <span class="line"></span>
+  </div>
+  <p>Fait avec <span class="heart">♥</span> pour les chercheuses de lumière</p>
+  <p class="signature">Nour al-Qur'an</p>
+  <p style="margin-top: 12px; font-size: 11px; color: var(--texte-sous); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6;">Texte arabe & traduction française : AlQuran.cloud (Hamidullah). Tafsir Ibn Kathir EN/AR : spa5k/tafsir_api. Tafsir français Al-Mukhtasar, introduction des sourates et audio segmenté Al-Husary : Quranic Universal Library (qul.tarteel.ai). Pour toute information sur les traducteurs ou licences, consulter QUL directement.</p>
+</footer>
+
+<script>
+// ========== ÉTAT GLOBAL ==========
+const API_BASE = 'https://api.alquran.cloud/v1';
+const QUL_BASE = 'https://aida-123.github.io/nour-al-quran';
+const QUL_FILES = {
+  tafsirFr: `${QUL_BASE}/french-mokhtasar.json`,
+  surahInfo: `${QUL_BASE}/surah-info-en.json`,
+  husaryAudio: `${QUL_BASE}/ayah-recitation-mahmoud-khalil-al-husary-murattal-hafs-957.json`
+};
+let allSurahs = [];
+let currentSurah = null;
+let currentReciter = 'ar.husary';
+let audioElement = null;
+let currentVerseIndex = 0;
+let favorites = JSON.parse(localStorage.getItem('nour_favorites') || '[]');
+let cache = JSON.parse(localStorage.getItem('nour_cache') || '{}');
+
+// Données QUL chargées au démarrage (en mémoire pour rapidité)
+let qulData = {
+  tafsirFr: null,
+  surahInfo: null,
+  husaryAudio: null
+};
+
+// Timer pour le surlignage mot par mot
+let wordHighlightInterval = null;
+
+// MODE Compréhension / Mémorisation
+let currentMode = localStorage.getItem('nour_mode') || 'comprehension';
+
+// MÉMORISATION : { "2:255": true, "1:1": true, ... }
+let memorized = JSON.parse(localStorage.getItem('nour_memorized') || '{}');
+
+// TO-DO : { revoir: [{id, text, done}], incomprehensions: [...], questions: [...] }
+let todoData = JSON.parse(localStorage.getItem('nour_todo') || '{"revoir":[],"incomprehensions":[],"questions":[]}');
+
+// SEMAINIER : { lundi: "...", mardi: "...", ... }
+let semainierData = JSON.parse(localStorage.getItem('nour_semainier') || '{}');
+
+// Masquage en mode Mémorisation - Set des verseKeys masqués (ex: "2:255")
+let hiddenArabic = new Set();
+let hiddenTranslation = new Set();
+let globalHideArabic = false;
+let globalHideTranslation = false;
+
+const reciters = {
+  'ar.husary': 'Sheikh Mahmoud Al-Husary ✦',
+  'ar.alafasy': 'Sheikh Mishary Al-Afasy',
+  'ar.abdulbasitmurattal': 'Sheikh Abdul Basit',
+  'ar.minshawi': 'Sheikh Mohamed Al-Minshawi',
+  'ar.muhammadayyoub': 'Sheikh Muhammad Ayyoub'
+};
+
+// ========== NAVIGATION ==========
+function selectModeAndGo(mode) {
+  currentMode = mode;
+  localStorage.setItem('nour_mode', mode);
+  resetHideStates();
+  showSection('surahs');
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  localStorage.setItem('nour_mode', mode);
+  resetHideStates();
+  // Fermer tous les panneaux tafsir ouverts
+  document.querySelectorAll('.tafsir-panel.open').forEach(p => {
+    p.classList.remove('open');
+    setTimeout(() => { p.innerHTML = ''; }, 500);
+  });
+  if (currentSurah) renderSurah();
+}
+
+function resetHideStates() {
+  hiddenArabic = new Set();
+  hiddenTranslation = new Set();
+  globalHideArabic = false;
+  globalHideTranslation = false;
+}
+
+// Bouton œil PAR VERSET (texte arabe)
+function toggleVerseArabic(verseKey) {
+  if (hiddenArabic.has(verseKey)) hiddenArabic.delete(verseKey);
+  else hiddenArabic.add(verseKey);
+  applyHideToVerse(verseKey);
+}
+
+// Bouton œil PAR VERSET (traduction)
+function toggleVerseTranslation(verseKey) {
+  if (hiddenTranslation.has(verseKey)) hiddenTranslation.delete(verseKey);
+  else hiddenTranslation.add(verseKey);
+  applyHideToVerse(verseKey);
+}
+
+function applyHideToVerse(verseKey) {
+  const [, vNum] = verseKey.split(':');
+  const arabicEl = document.getElementById(`arabic-${vNum}`);
+  const translEl = document.getElementById(`translation-${vNum}`);
+  const btnAr = document.getElementById(`hideAr-${vNum}`);
+  const btnFr = document.getElementById(`hideFr-${vNum}`);
+
+  if (arabicEl) {
+    arabicEl.classList.toggle('text-hidden', hiddenArabic.has(verseKey));
+    arabicEl.classList.remove('text-revealed');
+  }
+  if (translEl) {
+    translEl.classList.toggle('text-hidden', hiddenTranslation.has(verseKey));
+    translEl.classList.remove('text-revealed');
+  }
+  if (btnAr) btnAr.classList.toggle('active', hiddenArabic.has(verseKey));
+  if (btnFr) btnFr.classList.toggle('active', hiddenTranslation.has(verseKey));
+}
+
+// Bouton GLOBAL : tout masquer / tout afficher (arabe)
+function toggleAllArabic() {
+  if (!currentSurah) return;
+  const arabic = currentSurah.data[0];
+  globalHideArabic = !globalHideArabic;
+  if (globalHideArabic) {
+    arabic.ayahs.forEach(a => hiddenArabic.add(`${currentSurah.number}:${a.numberInSurah}`));
+  } else {
+    arabic.ayahs.forEach(a => hiddenArabic.delete(`${currentSurah.number}:${a.numberInSurah}`));
+  }
+  arabic.ayahs.forEach(a => applyHideToVerse(`${currentSurah.number}:${a.numberInSurah}`));
+  const btn = document.getElementById('globalHideArabicBtn');
+  if (btn) {
+    btn.classList.toggle('active', globalHideArabic);
+    btn.querySelector('.btn-label').textContent = globalHideArabic ? 'Tout afficher' : 'Tout masquer';
+  }
+}
+
+function toggleAllTranslation() {
+  if (!currentSurah) return;
+  const arabic = currentSurah.data[0];
+  globalHideTranslation = !globalHideTranslation;
+  if (globalHideTranslation) {
+    arabic.ayahs.forEach(a => hiddenTranslation.add(`${currentSurah.number}:${a.numberInSurah}`));
+  } else {
+    arabic.ayahs.forEach(a => hiddenTranslation.delete(`${currentSurah.number}:${a.numberInSurah}`));
+  }
+  arabic.ayahs.forEach(a => applyHideToVerse(`${currentSurah.number}:${a.numberInSurah}`));
+  const btn = document.getElementById('globalHideTranslationBtn');
+  if (btn) {
+    btn.classList.toggle('active', globalHideTranslation);
+    btn.querySelector('.btn-label').textContent = globalHideTranslation ? 'Tout afficher' : 'Tout masquer';
+  }
+}
+
+// Révéler temporairement un texte masqué au clic
+function revealText(el) {
+  if (el.classList.contains('text-hidden')) {
+    el.classList.add('text-revealed');
+  }
+}
+
+function showSection(section) {
+  document.getElementById('home-section').style.display = section === 'home' ? 'block' : 'none';
+  document.getElementById('surahs-section').classList.toggle('active', section === 'surahs');
+  document.getElementById('reader-section').classList.toggle('active', section === 'reader');
+  document.getElementById('progression-section').classList.toggle('active', section === 'progression');
+  document.getElementById('favorites-section').classList.toggle('active', section === 'favorites');
+
+  // Footer visible uniquement sur la page d'accueil
+  document.body.classList.toggle('show-footer', section === 'home');
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.classList.toggle('active', link.dataset.section === section || (section === 'reader' && link.dataset.section === 'surahs'));
+  });
+
+  if (section === 'surahs' && allSurahs.length === 0) loadSurahs();
+  if (section === 'progression') loadProgression();
+  if (section === 'favorites') loadFavorites();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ========== NOTIFICATIONS ==========
+function showNotification(message) {
+  const notif = document.createElement('div');
+  notif.className = 'notification';
+  notif.textContent = message;
+  document.body.appendChild(notif);
+  setTimeout(() => {
+    notif.classList.add('hide');
+    setTimeout(() => notif.remove(), 400);
+  }, 2500);
+}
+
+// ========== CHARGEMENT DES SOURATES ==========
+async function loadSurahs() {
+  try {
+    if (cache.surahsList) {
+      allSurahs = cache.surahsList;
+      renderSurahs(allSurahs);
+      return;
+    }
+    const response = await fetch(`${API_BASE}/surah`);
+    const data = await response.json();
+    allSurahs = data.data;
+    cache.surahsList = allSurahs;
+    saveCache();
+    renderSurahs(allSurahs);
+  } catch (error) {
+    const grid = document.getElementById('surahsGrid');
+    if (grid) grid.innerHTML = '<div class="empty-state"><div class="icon">✦</div><p>Une erreur est survenue. Vérifie ta connexion internet.</p></div>';
+  }
+}
+
+function renderSurahs(surahs) {
+  const grid = document.getElementById('surahsGrid');
+  if (surahs.length === 0) {
+    grid.innerHTML = '<div class="empty-state"><div class="icon">❀</div><p>Aucune sourate trouvée</p></div>';
+    return;
+  }
+
+  grid.innerHTML = surahs.map(s => `
+    <div class="surah-card" onclick="openSurah(${s.number})">
+      <div class="surah-number">— ${String(s.number).padStart(3, '0')} —</div>
+      <div class="surah-arabic">${s.name.replace('سُورَةُ ', '')}</div>
+      <div class="surah-info">
+        <h4>${s.englishName}</h4>
+        <div class="meta">${s.numberOfAyahs} versets</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterSurahs() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const filtered = allSurahs.filter(s =>
+    s.englishName.toLowerCase().includes(search) ||
+    s.englishNameTranslation.toLowerCase().includes(search) ||
+    s.number.toString().includes(search)
+  );
+  renderSurahs(filtered);
+}
+
+// ========== OUVERTURE D'UNE SOURATE ==========
+async function openSurah(number) {
+  showSection('reader');
+  const content = document.getElementById('readerContent');
+  content.innerHTML = '<div class="loader">Chargement de la sourate...</div>';
+
+  try {
+    let surahData;
+    const cacheKey = `surah_${number}`;
+
+    if (cache[cacheKey]) {
+      surahData = cache[cacheKey];
+    } else {
+      const response = await fetch(`${API_BASE}/surah/${number}/editions/quran-uthmani,fr.hamidullah`);
+      const data = await response.json();
+      surahData = data.data;
+      cache[cacheKey] = surahData;
+      saveCache();
+    }
+
+    currentSurah = { number, data: surahData };
+    renderSurah();
+  } catch (error) {
+    content.innerHTML = '<div class="empty-state"><div class="icon">✦</div><p>Erreur lors du chargement. Réessaye plus tard.</p></div>';
+  }
+}
+
+function renderSurah() {
+  const arabic = currentSurah.data[0];
+  const french = currentSurah.data[1];
+  const surahNum = currentSurah.number;
+
+  // Extraction de la basmala du verset 1 (sauf Al-Fatiha=1 et At-Tawba=9)
+  const BASMALA_AR = 'بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ';
+  // Détection robuste : on retire toutes les marques de voyellage et on compare les lettres de base
+  const stripDiacritics = (s) => s.replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/g, '');
+  const BASMALA_BASE = stripDiacritics(BASMALA_AR);
+
+  let extractedBasmala = false;
+  if (surahNum !== 1 && surahNum !== 9 && arabic.ayahs[0]) {
+    const firstVerseText = arabic.ayahs[0].text;
+    const firstBase = stripDiacritics(firstVerseText);
+    if (firstBase.startsWith(BASMALA_BASE)) {
+      let baseCount = 0;
+      let endIdx = 0;
+      const isDiacritic = (ch) => /[\u064B-\u065F\u0670\u06D6-\u06ED\u0640]/.test(ch);
+      for (let i = 0; i < firstVerseText.length; i++) {
+        if (!isDiacritic(firstVerseText[i])) {
+          baseCount++;
+        }
+        if (baseCount > BASMALA_BASE.length) {
+          endIdx = i;
+          break;
+        }
+        endIdx = i + 1;
+      }
+      arabic.ayahs[0] = { ...arabic.ayahs[0], text: firstVerseText.substring(endIdx).trim() };
+      extractedBasmala = true;
+    }
+  }
+
+  const isMemoMode = currentMode === 'memorization';
+  const content = document.getElementById('readerContent');
+
+  content.innerHTML = `
+    <button class="back-button" onclick="showSection('surahs'); stopAudio();">← Retour aux sourates</button>
+    <div class="reader-header">
+      <div class="surah-arabic-large">${arabic.name}</div>
+      <div class="surah-name-french">${arabic.englishName}</div>
+      <div class="surah-translation">${arabic.englishNameTranslation}</div>
+      <div class="surah-meta">
+        <span>✦ ${arabic.numberOfAyahs} versets</span>
+        <span>❀ ${arabic.revelationType === 'Meccan' ? 'Mecquoise' : 'Médinoise'}</span>
+      </div>
+      ${extractedBasmala ? `
+        <div class="basmala-header">
+          <div class="basmala-row">
+            <span class="basmala-ornament">✦   ✦</span>
+            <div class="basmala-arabic">${BASMALA_AR}</div>
+            <span class="basmala-ornament">✦   ✦</span>
+          </div>
+          <div class="basmala-french">Au nom d'Allah, le Tout Miséricordieux, le Très Miséricordieux</div>
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="mode-toggle-wrapper">
+      <div class="mode-toggle-container">
+        <button class="mode-toggle-btn ${currentMode === 'comprehension' ? 'active' : ''}" onclick="switchMode('comprehension')">
+          <span class="icon">✦</span> Compréhension
+        </button>
+        <button class="mode-toggle-btn ${currentMode === 'memorization' ? 'active' : ''}" onclick="switchMode('memorization')">
+          <span class="icon">❀</span> Mémorisation
+        </button>
+      </div>
+    </div>
+
+    ${!isMemoMode && qulData.surahInfo && qulData.surahInfo[String(surahNum)] ? `
+      <div class="surah-info-section" id="surahInfoSection">
+        <div class="surah-info-header" onclick="toggleSurahInfo()">
+          <div class="surah-info-title">À savoir sur cette sourate <span class="lang-badge">EN</span></div>
+          <div class="surah-info-toggle">▾</div>
+        </div>
+        <div class="surah-info-content">
+          <div class="surah-info-body">${sanitizeSurahInfoHTML(qulData.surahInfo[String(surahNum)].text || '')}</div>
+        </div>
+      </div>
+    ` : ''}
+
+    <div class="audio-player">
+      <button class="play-btn" id="playBtn" onclick="togglePlayAll()">▶</button>
+      <div class="audio-info">
+        <div class="reciter-name" id="reciterName">${reciters[currentReciter]}</div>
+        <div class="reciter-label">${currentReciter === 'ar.husary' && isMemoMode ? 'Surlignage mot par mot ✦' : 'Récitateur'}</div>
+      </div>
+      <div class="audio-controls">
+        <select class="reciter-select" onchange="changeReciter(this.value)">
+          ${Object.entries(reciters).map(([key, name]) =>
+            `<option value="${key}" ${key === currentReciter ? 'selected' : ''}>${name}</option>`
+          ).join('')}
+        </select>
+      </div>
+      ${isMemoMode ? `
+        <div class="hide-controls">
+          <button id="globalHideArabicBtn" class="hide-btn" onclick="toggleAllArabic()" title="Masquer tout l'arabe">
+            <span class="eye">👁</span> Arabe : <span class="btn-label">Tout masquer</span>
+          </button>
+          <button id="globalHideTranslationBtn" class="hide-btn" onclick="toggleAllTranslation()" title="Masquer toutes les traductions">
+            <span class="eye">👁</span> Trad. : <span class="btn-label">Tout masquer</span>
+          </button>
+        </div>
+      ` : ''}
+    </div>
+
+    <div class="verses-container" id="versesContainer">
+      ${arabic.ayahs.map((ayah, i) => {
+        const isFav = favorites.some(f => f.surah === currentSurah.number && f.verse === ayah.numberInSurah);
+        const arabicWithWords = wrapArabicWords(ayah.text, ayah.numberInSurah);
+        const memoKey = `${currentSurah.number}:${ayah.numberInSurah}`;
+        const isMemorized = memorized[memoKey] === true;
+        const isArHidden = hiddenArabic.has(memoKey);
+        const isFrHidden = hiddenTranslation.has(memoKey);
+        return `
+          <div class="verse" id="verse-${ayah.numberInSurah}" data-index="${i}">
+            <div class="verse-header">
+              <div class="verse-number">${ayah.numberInSurah}</div>
+              <div class="verse-actions">
+                <button class="verse-action ${isFav ? 'active' : ''}" onclick="toggleFavorite(${currentSurah.number}, ${ayah.numberInSurah}, '${escapeStr(ayah.text)}', '${escapeStr(french.ayahs[i].text)}', '${escapeStr(arabic.englishName)}')" title="Favori">♥</button>
+                <button class="verse-action verse-play-btn" id="playBtn-${ayah.numberInSurah}" onclick="onVersePlayClick(${i}, ${ayah.numberInSurah})" title="Écouter">▶</button>
+                <button class="verse-action" onclick="repeatVerse(${i})" title="Répéter 3x">↻</button>
+                ${!isMemoMode ? `<button class="verse-action tafsir-btn" id="tafsir-btn-${ayah.numberInSurah}" onclick="toggleTafsir(${currentSurah.number}, ${ayah.numberInSurah})" title="Tafsir">📖</button>` : ''}
+                ${isMemoMode ? `
+                  <button class="verse-action ${isArHidden ? 'tafsir-active' : ''}" id="hideAr-${ayah.numberInSurah}" onclick="toggleVerseArabic('${memoKey}')" title="Masquer/afficher l'arabe">👁︎</button>
+                  <button class="verse-action ${isFrHidden ? 'tafsir-active' : ''}" id="hideFr-${ayah.numberInSurah}" onclick="toggleVerseTranslation('${memoKey}')" title="Masquer/afficher la traduction">🇫🇷</button>
+                ` : ''}
+              </div>
+            </div>
+            <div class="verse-arabic ${isArHidden ? 'text-hidden' : ''}" id="arabic-${ayah.numberInSurah}" onclick="revealText(this)">${arabicWithWords}</div>
+            <div class="verse-translation ${isFrHidden ? 'text-hidden' : ''}" id="translation-${ayah.numberInSurah}" onclick="revealText(this)">« ${french.ayahs[i].text} »</div>
+            ${isMemoMode ? `
+              <div style="display: flex; justify-content: flex-end; margin-top: 12px;">
+                <div class="memorized-check ${isMemorized ? 'checked' : ''}" onclick="toggleMemorized(${currentSurah.number}, ${ayah.numberInSurah})">
+                  <span class="check-mark">${isMemorized ? '✓' : ''}</span>
+                  ${isMemorized ? 'Mémorisé' : 'Marquer comme mémorisé'}
+                </div>
+              </div>
+            ` : ''}
+            <div class="tafsir-panel" id="tafsir-panel-${ayah.numberInSurah}"></div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+// Découpe le texte arabe en mots avec des spans pour le highlighting
+function wrapArabicWords(text, verseNumber) {
+  const words = text.split(/\s+/).filter(w => w.length > 0);
+  return words.map((word, idx) =>
+    `<span class="word" data-verse="${verseNumber}" data-word="${idx + 1}">${word}</span>`
+  ).join(' ');
+}
+
+function toggleSurahInfo() {
+  const section = document.getElementById('surahInfoSection');
+  if (section) section.classList.toggle('open');
+}
+
+// Sanitization HTML pour les contenus Surah Info / Tafsir riches
+function sanitizeSurahInfoHTML(html) {
+  const allowed = ['h2', 'h3', 'p', 'ol', 'ul', 'li', 'strong', 'em', 'b', 'i', 'a', 'br'];
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  const walk = (node) => {
+    const children = Array.from(node.childNodes);
+    children.forEach(child => {
+      if (child.nodeType === 1) {
+        const tag = child.tagName.toLowerCase();
+        if (!allowed.includes(tag)) {
+          const text = document.createTextNode(child.textContent);
+          node.replaceChild(text, child);
+        } else {
+          if (tag === 'a') {
+            const href = child.getAttribute('href') || '#';
+            while (child.attributes.length > 0) {
+              child.removeAttribute(child.attributes[0].name);
+            }
+            child.setAttribute('href', href);
+            child.setAttribute('target', '_blank');
+            child.setAttribute('rel', 'noopener noreferrer');
+          } else {
+            while (child.attributes.length > 0) {
+              child.removeAttribute(child.attributes[0].name);
+            }
+          }
+          walk(child);
+        }
+      }
+    });
+  };
+  walk(tmp);
+  return tmp.innerHTML;
+}
+
+// ========== MÉMORISATION ==========
+function toggleMemorized(surahNum, verseNum) {
+  const key = `${surahNum}:${verseNum}`;
+  if (memorized[key]) {
+    delete memorized[key];
+  } else {
+    memorized[key] = true;
+  }
+  localStorage.setItem('nour_memorized', JSON.stringify(memorized));
+
+  // Mettre à jour visuellement
+  if (currentSurah) renderSurah();
+
+  // Vérifier si la sourate est complètement mémorisée
+  checkSurahCompletion(surahNum);
+}
+
+function checkSurahCompletion(surahNum) {
+  const surah = allSurahs.find(s => s.number === surahNum);
+  if (!surah) return;
+  let memCount = 0;
+  for (let v = 1; v <= surah.numberOfAyahs; v++) {
+    if (memorized[`${surahNum}:${v}`]) memCount++;
+  }
+  if (memCount === surah.numberOfAyahs && !memorized[`__celebrated_${surahNum}`]) {
+    memorized[`__celebrated_${surahNum}`] = true;
+    localStorage.setItem('nour_memorized', JSON.stringify(memorized));
+    showCelebration(surah);
+  }
+}
+
+function showCelebration(surah) {
+  const overlay = document.createElement('div');
+  overlay.className = 'celebration-overlay';
+  overlay.innerHTML = `
+    <div class="celebration-card">
+      <div class="stars">✦ ❀ ✦</div>
+      <h3>Bravo, ma sœur !</h3>
+      <div class="surah-name">${surah.englishName}</div>
+      <div class="message">
+        Tu as mémorisé l'intégralité de cette sourate.<br>
+        Qu'Allah te récompense pour ton effort et illumine ton cœur de Sa parole.
+      </div>
+      <button class="close-btn" onclick="this.closest('.celebration-overlay').remove()">Continuer</button>
+    </div>
+  `;
+  overlay.onclick = (e) => {
+    if (e.target === overlay) overlay.remove();
+  };
+  document.body.appendChild(overlay);
+}
+
+function escapeStr(str) {
+  return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+// ========== AUDIO ==========
+// ========== AUDIO ==========
+// Clic sur le bouton ▶ d'un verset : si c'est le même verset qui joue, on met en pause / reprend
+// sinon on lance la lecture de ce nouveau verset.
+function onVersePlayClick(index, verseNumber) {
+  // Cas 1 : ce verset est en train de jouer → on met en pause
+  if ((audioState === 'playing' || audioState === 'repeating') && currentVerseNumber === verseNumber) {
+    pauseAudio();
+    return;
+  }
+  // Cas 2 : ce verset est en pause → on reprend
+  if (audioState === 'paused' && currentVerseNumber === verseNumber) {
+    resumeAudio();
+    return;
+  }
+  // Cas 3 : autre verset (ou rien) → on lance ce verset
+  playVerse(index);
+}
+
+// État de la lecture
+// 'stopped'  : aucune lecture
+// 'playing'  : lecture en cours
+// 'paused'   : audio mis en pause
+// 'repeating' : mode répétition x3 actif
+let audioState = 'stopped';
+let isRepeatMode = false;
+let repeatCount = 0;
+let repeatIndex = null;
+let currentSegments = null; // Segments du verset en cours (pour highlight)
+let currentVerseNumber = null; // Numéro du verset en cours (dans la sourate)
+
+function changeReciter(reciter) {
+  currentReciter = reciter;
+  const nameEl = document.getElementById('reciterName');
+  if (nameEl) nameEl.textContent = reciters[reciter];
+  stopAudio();
+}
+
+function togglePlayAll() {
+  if (audioState === 'playing' || audioState === 'repeating') {
+    pauseAudio();
+  } else if (audioState === 'paused') {
+    resumeAudio();
+  } else {
+    playVerse(currentVerseIndex);
+  }
+}
+
+function pauseAudio() {
+  if (audioElement) audioElement.pause();
+  audioState = 'paused';
+  stopWordHighlight();
+  updatePlayButtons();
+}
+
+function resumeAudio() {
+  if (audioElement) {
+    audioElement.play().catch(() => {
+      showNotification('Lecture impossible.');
+      stopAudio();
+    });
+    audioState = isRepeatMode ? 'repeating' : 'playing';
+    if (currentSegments && currentVerseNumber) {
+      startWordHighlight(currentVerseNumber, currentSegments);
+    }
+    updatePlayButtons();
+  }
+}
+
+function playVerse(index) {
+  stopAudio();
+  isRepeatMode = false;
+  const arabic = currentSurah.data[0];
+  const ayah = arabic.ayahs[index];
+  const verseKey = `${currentSurah.number}:${ayah.numberInSurah}`;
+
+  // Si Husary + audio QUL disponible : utiliser audio_url + segments
+  let audioUrl;
+  let segments = null;
+  if (currentReciter === 'ar.husary' && qulData.husaryAudio && qulData.husaryAudio[verseKey]) {
+    audioUrl = qulData.husaryAudio[verseKey].audio_url;
+    segments = qulData.husaryAudio[verseKey].segments;
+  } else {
+    audioUrl = `https://cdn.islamic.network/quran/audio/128/${currentReciter}/${ayah.number}.mp3`;
+  }
+
+  audioElement = new Audio(audioUrl);
+  currentVerseIndex = index;
+  currentVerseNumber = ayah.numberInSurah;
+  currentSegments = segments;
+  audioState = 'playing';
+
+  document.querySelectorAll('.verse').forEach(v => v.classList.remove('playing'));
+  const verseEl = document.getElementById(`verse-${ayah.numberInSurah}`);
+  if (verseEl) {
+    verseEl.classList.add('playing');
+    verseEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  updatePlayButtons();
+
+  audioElement.play().catch(e => {
+    showNotification('Lecture impossible. Vérifie ta connexion.');
+    stopAudio();
+  });
+
+  // Surlignage mot par mot si segments disponibles
+  if (segments && segments.length > 0) {
+    startWordHighlight(ayah.numberInSurah, segments);
+  }
+
+  audioElement.onended = () => {
+    stopWordHighlight();
+    if (index + 1 < arabic.ayahs.length && audioState === 'playing') {
+      playVerse(index + 1);
+    } else {
+      stopAudio();
+    }
+  };
+}
+
+function startWordHighlight(verseNumber, segments) {
+  stopWordHighlight();
+  wordHighlightInterval = setInterval(() => {
+    if (!audioElement || audioState === 'paused' || audioState === 'stopped') return;
+    const currentMs = audioElement.currentTime * 1000;
+
+    // Trouver le segment actuel
+    let activeWord = null;
+    for (const seg of segments) {
+      const [wordIdx, startMs, endMs] = seg;
+      if (currentMs >= startMs && currentMs <= endMs) {
+        activeWord = wordIdx;
+        break;
+      }
+    }
+
+    // Mettre à jour le surlignage
+    const verseEl = document.getElementById(`arabic-${verseNumber}`);
+    if (verseEl) {
+      verseEl.querySelectorAll('.word').forEach(w => {
+        const wordNum = parseInt(w.getAttribute('data-word'));
+        if (wordNum === activeWord) {
+          w.classList.add('word-highlighted');
+        } else {
+          w.classList.remove('word-highlighted');
+        }
+      });
+    }
+  }, 50);
+}
+
+function stopWordHighlight() {
+  if (wordHighlightInterval) {
+    clearInterval(wordHighlightInterval);
+    wordHighlightInterval = null;
+  }
+  document.querySelectorAll('.word-highlighted').forEach(w => w.classList.remove('word-highlighted'));
+}
+
+function repeatVerse(index) {
+  stopAudio();
+  isRepeatMode = true;
+  repeatCount = 0;
+  repeatIndex = index;
+
+  const arabic = currentSurah.data[0];
+  const ayah = arabic.ayahs[index];
+  const verseKey = `${currentSurah.number}:${ayah.numberInSurah}`;
+
+  // Récupérer URL et segments selon récitateur
+  let audioUrl;
+  let segments = null;
+  if (currentReciter === 'ar.husary' && qulData.husaryAudio && qulData.husaryAudio[verseKey]) {
+    audioUrl = qulData.husaryAudio[verseKey].audio_url;
+    segments = qulData.husaryAudio[verseKey].segments;
+  } else {
+    audioUrl = `https://cdn.islamic.network/quran/audio/128/${currentReciter}/${ayah.number}.mp3`;
+  }
+
+  currentVerseNumber = ayah.numberInSurah;
+  currentSegments = segments;
+
+  showNotification('Répétition x3 ❀');
+  playRepeatedVerse(audioUrl, segments, ayah.numberInSurah);
+}
+
+function playRepeatedVerse(audioUrl, segments, verseNumber) {
+  audioElement = new Audio(audioUrl);
+  audioState = 'repeating';
+
+  document.querySelectorAll('.verse').forEach(v => v.classList.remove('playing'));
+  const verseEl = document.getElementById(`verse-${verseNumber}`);
+  if (verseEl) verseEl.classList.add('playing');
+
+  updatePlayButtons();
+
+  audioElement.play().catch(() => {
+    showNotification('Lecture impossible.');
+    stopAudio();
+  });
+
+  // Démarrer le highlight mot par mot pour cette répétition
+  if (segments && segments.length > 0) {
+    startWordHighlight(verseNumber, segments);
+  }
+
+  audioElement.onended = () => {
+    stopWordHighlight();
+    repeatCount++;
+    if (repeatCount < 3 && (audioState === 'repeating' || audioState === 'paused')) {
+      // Continuer la répétition
+      playRepeatedVerse(audioUrl, segments, verseNumber);
+    } else {
+      stopAudio();
+      if (repeatCount >= 3) showNotification('Répétition terminée ✦');
+    }
+  };
+}
+
+function stopAudio() {
+  if (audioElement) {
+    audioElement.pause();
+    audioElement = null;
+  }
+  audioState = 'stopped';
+  isRepeatMode = false;
+  repeatCount = 0;
+  repeatIndex = null;
+  currentSegments = null;
+  currentVerseNumber = null;
+  stopWordHighlight();
+  updatePlayButtons();
+  document.querySelectorAll('.verse').forEach(v => v.classList.remove('playing'));
+}
+
+// Met à jour visuellement tous les boutons play/pause
+function updatePlayButtons() {
+  // Bouton global du player audio
+  const mainBtn = document.getElementById('playBtn');
+  if (mainBtn) {
+    if (audioState === 'playing' || audioState === 'repeating') {
+      mainBtn.textContent = '❚❚';
+    } else if (audioState === 'paused') {
+      mainBtn.textContent = '▶';
+    } else {
+      mainBtn.textContent = '▶';
+    }
+  }
+
+  // Boutons ▶ par verset : on remet tous à "▶" puis on met "❚❚" sur le verset en cours si ça joue
+  document.querySelectorAll('.verse-play-btn').forEach(b => {
+    b.textContent = '▶';
+    b.title = 'Écouter';
+  });
+  if ((audioState === 'playing' || audioState === 'repeating') && currentVerseNumber) {
+    const playingBtn = document.getElementById(`playBtn-${currentVerseNumber}`);
+    if (playingBtn) {
+      playingBtn.textContent = '❚❚';
+      playingBtn.title = 'Mettre en pause';
+    }
+  }
+}
+
+// ========== FAVORIS ==========
+function toggleFavorite(surah, verse, arabic, french, surahName) {
+  const idx = favorites.findIndex(f => f.surah === surah && f.verse === verse);
+  if (idx > -1) {
+    favorites.splice(idx, 1);
+    showNotification('Retiré des favoris');
+  } else {
+    favorites.push({ surah, verse, arabic: arabic.replace(/&quot;/g, '"'), french: french.replace(/&quot;/g, '"'), surahName: surahName.replace(/&quot;/g, '"') });
+    showNotification('Ajouté aux favoris ♥');
+  }
+  localStorage.setItem('nour_favorites', JSON.stringify(favorites));
+  if (currentSurah) renderSurah();
+}
+
+function loadFavorites() {
+  const container = document.getElementById('favoritesContent');
+  if (favorites.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state">
+        <div class="icon">♥</div>
+        <p>Aucun favori pour le moment.<br>Marque les versets qui touchent ton cœur en les explorant.</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Regrouper par sourate
+  const grouped = {};
+  favorites.forEach((f, originalIdx) => {
+    if (!grouped[f.surah]) {
+      grouped[f.surah] = { surahNum: f.surah, surahName: f.surahName, verses: [] };
+    }
+    grouped[f.surah].verses.push({ ...f, originalIdx });
+  });
+
+  // Trier les sourates par numéro et les versets par numéro
+  const groups = Object.values(grouped).sort((a, b) => a.surahNum - b.surahNum);
+  groups.forEach(g => g.verses.sort((a, b) => a.verse - b.verse));
+
+  container.innerHTML = `
+    <div style="text-align: center; margin-bottom: 16px; color: var(--texte-doux); font-style: italic;">
+      ${favorites.length} verset${favorites.length > 1 ? 's' : ''} dans ${groups.length} sourate${groups.length > 1 ? 's' : ''}
+    </div>
+    ${groups.map(g => `
+      <div class="fav-group">
+        <div class="fav-group-header" onclick="toggleFavGroup(${g.surahNum})">
+          <div class="fav-group-info">
+            <div class="fav-group-num">${g.surahNum}</div>
+            <div>
+              <div class="fav-group-name">${g.surahName}</div>
+              <div class="fav-group-count">${g.verses.length} verset${g.verses.length > 1 ? 's' : ''} en favori</div>
+            </div>
+          </div>
+          <span class="fav-group-arrow" id="favArrow-${g.surahNum}">▾</span>
+        </div>
+        <div class="fav-group-content" id="favContent-${g.surahNum}">
+          <div class="fav-group-verses">
+            ${g.verses.map(f => `
+              <div class="verse">
+                <div class="verse-header">
+                  <div class="verse-number">${f.verse}</div>
+                  <div class="verse-actions">
+                    <button class="verse-action active" onclick="removeFavorite(${f.originalIdx})" title="Retirer">♥</button>
+                    <button class="verse-action" onclick="openSurah(${f.surah})" title="Voir la sourate">→</button>
+                  </div>
+                </div>
+                <div class="verse-arabic">${f.arabic}</div>
+                <div class="verse-translation">« ${f.french} »</div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function toggleFavGroup(surahNum) {
+  const content = document.getElementById(`favContent-${surahNum}`);
+  const arrow = document.getElementById(`favArrow-${surahNum}`);
+  if (content) {
+    content.classList.toggle('open');
+    if (arrow) arrow.classList.toggle('open');
+  }
+}
+
+function removeFavorite(index) {
+  favorites.splice(index, 1);
+  localStorage.setItem('nour_favorites', JSON.stringify(favorites));
+  loadFavorites();
+  showNotification('Favori retiré');
+}
+
+// ========== TAFSIR ==========
+const TAFSIR_BASE = 'https://cdn.jsdelivr.net/gh/spa5k/tafsir_api@main/tafsir';
+const tafsirEditions = {
+  'fr': { slug: 'fr-mokhtasar', label: 'Français', dir: 'ltr', source: 'qul' },
+  'en': { slug: 'en-tafisr-ibn-kathir', label: 'English', dir: 'ltr', source: 'spa5k' },
+  'ar': { slug: 'ar-tafsir-ibn-kathir', label: 'العربية', dir: 'rtl', source: 'spa5k' }
+};
+let currentTafsirLang = 'fr';
+
+async function toggleTafsir(surahNum, verseNum) {
+  const panel = document.getElementById(`tafsir-panel-${verseNum}`);
+  const btn = document.getElementById(`tafsir-btn-${verseNum}`);
+
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    btn.classList.remove('tafsir-active');
+    setTimeout(() => { panel.innerHTML = ''; }, 500);
+    return;
+  }
+
+  // Fermer les autres panneaux ouverts
+  document.querySelectorAll('.tafsir-panel.open').forEach(p => {
+    p.classList.remove('open');
+    setTimeout(() => { p.innerHTML = ''; }, 500);
+  });
+  document.querySelectorAll('.tafsir-btn.tafsir-active').forEach(b => {
+    b.classList.remove('tafsir-active');
+  });
+
+  btn.classList.add('tafsir-active');
+  panel.innerHTML = renderTafsirShell(surahNum, verseNum);
+  panel.classList.add('open');
+
+  await loadTafsir(surahNum, verseNum, currentTafsirLang);
+}
+
+function renderTafsirShell(surahNum, verseNum) {
+  const titleByLang = {
+    'fr': 'Tafsir Al-Mukhtasar (français)',
+    'en': 'Tafsir Ibn Kathir',
+    'ar': 'Tafsir Ibn Kathir'
+  };
+  return `
+    <div class="tafsir-header">
+      <div class="tafsir-title">${titleByLang[currentTafsirLang]}</div>
+      <div class="tafsir-lang-toggle">
+        <button class="${currentTafsirLang === 'fr' ? 'active' : ''}" onclick="switchTafsirLang(${surahNum}, ${verseNum}, 'fr')">Français</button>
+        <button class="${currentTafsirLang === 'en' ? 'active' : ''}" onclick="switchTafsirLang(${surahNum}, ${verseNum}, 'en')">English</button>
+        <button class="${currentTafsirLang === 'ar' ? 'active' : ''}" onclick="switchTafsirLang(${surahNum}, ${verseNum}, 'ar')">العربية</button>
+      </div>
+    </div>
+    <div class="tafsir-content" id="tafsir-content-${verseNum}">
+      <div class="tafsir-loader">Chargement du commentaire...</div>
+    </div>
+  `;
+}
+
+async function switchTafsirLang(surahNum, verseNum, lang) {
+  currentTafsirLang = lang;
+  const panel = document.getElementById(`tafsir-panel-${verseNum}`);
+  panel.innerHTML = renderTafsirShell(surahNum, verseNum);
+  await loadTafsir(surahNum, verseNum, lang);
+}
+
+async function loadTafsir(surahNum, verseNum, lang) {
+  const contentEl = document.getElementById(`tafsir-content-${verseNum}`);
+  if (!contentEl) return;
+
+  const edition = tafsirEditions[lang];
+
+  try {
+    let text = '';
+
+    // Source QUL (français) — déjà chargée en mémoire
+    if (edition.source === 'qul' && lang === 'fr') {
+      if (!qulData.tafsirFr) {
+        contentEl.innerHTML = '<div class="tafsir-empty">Le tafsir français n\'a pas pu être chargé. Vérifie ta connexion.</div>';
+        return;
+      }
+      const key = `${surahNum}:${verseNum}`;
+      const entry = qulData.tafsirFr[key];
+      text = entry ? (entry.text || '').trim() : '';
+    }
+    // Source spa5k (en/ar) — via API CDN avec cache
+    else if (edition.source === 'spa5k') {
+      const cacheKey = `tafsir_${edition.slug}_${surahNum}_${verseNum}`;
+      let tafsirData;
+      if (cache[cacheKey]) {
+        tafsirData = cache[cacheKey];
+      } else {
+        const url = `${TAFSIR_BASE}/${edition.slug}/${surahNum}/${verseNum}.json`;
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Tafsir indisponible');
+        tafsirData = await response.json();
+        cache[cacheKey] = tafsirData;
+        saveCache();
+      }
+      text = (tafsirData.text || '').trim();
+    }
+
+    if (!text) {
+      contentEl.innerHTML = '<div class="tafsir-empty">Aucun commentaire disponible pour ce verset.</div>';
+      return;
+    }
+
+    contentEl.setAttribute('dir', edition.dir);
+    contentEl.innerHTML = sanitizeTafsirHTML(text);
+  } catch (error) {
+    contentEl.innerHTML = '<div class="tafsir-empty">Erreur lors du chargement du commentaire. Vérifie ta connexion internet.</div>';
+  }
+}
+
+function sanitizeTafsirHTML(html) {
+  // Autoriser uniquement quelques balises sûres : h2, h3, p, br, strong, em
+  // Tout le reste est échappé
+  const allowed = ['h2', 'h3', 'p', 'br', 'strong', 'em', 'b', 'i'];
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+
+  const walk = (node) => {
+    const children = Array.from(node.childNodes);
+    children.forEach(child => {
+      if (child.nodeType === 1) { // Element
+        const tag = child.tagName.toLowerCase();
+        if (!allowed.includes(tag)) {
+          // Remplacer la balise par son contenu textuel
+          const text = document.createTextNode(child.textContent);
+          node.replaceChild(text, child);
+        } else {
+          // Nettoyer les attributs (garder aucun)
+          while (child.attributes.length > 0) {
+            child.removeAttribute(child.attributes[0].name);
+          }
+          walk(child);
+        }
+      }
+    });
+  };
+  walk(tmp);
+  return tmp.innerHTML;
+}
+
+// ========== PROGRESSION ==========
+let currentProgTab = 'memorized';
+
+function switchProgTab(tab) {
+  currentProgTab = tab;
+  document.querySelectorAll('.progression-tab').forEach(b => {
+    b.classList.toggle('active', b.dataset.progtab === tab);
+  });
+  document.querySelectorAll('.progression-section').forEach(s => s.classList.remove('active'));
+  document.getElementById(`progSection-${tab}`).classList.add('active');
+  loadProgression();
+}
+
+function loadProgression() {
+  if (currentProgTab === 'memorized') renderMemorizedSection();
+  else if (currentProgTab === 'todo') renderTodoSection();
+  else if (currentProgTab === 'semainier') renderSemainierSection();
+}
+
+function renderMemorizedSection() {
+  const container = document.getElementById('progSection-memorized');
+
+  // S'assurer que les sourates sont chargées
+  if (allSurahs.length === 0) {
+    container.innerHTML = '<div class="loader">Chargement...</div>';
+    loadSurahs().then(() => renderMemorizedSection());
+    return;
+  }
+
+  // Calcul des statistiques
+  let totalMemorized = 0;
+  const totalVerses = 6236;
+  const surahStats = allSurahs.map(s => {
+    const memVerses = [];
+    for (let v = 1; v <= s.numberOfAyahs; v++) {
+      if (memorized[`${s.number}:${v}`]) memVerses.push(v);
+    }
+    totalMemorized += memVerses.length;
+    return { ...s, memVerses, percent: Math.round((memVerses.length / s.numberOfAyahs) * 100) };
+  });
+
+  const withProgress = surahStats.filter(s => s.memVerses.length > 0).sort((a, b) => b.percent - a.percent);
+
+  const globalPercent = ((totalMemorized / totalVerses) * 100).toFixed(2);
+
+  container.innerHTML = `
+    <div class="progression-stats">
+      <div class="number">${totalMemorized} <span style="font-size: 24px; color: var(--texte-doux);">/ ${totalVerses}</span></div>
+      <div class="label">versets mémorisés (${globalPercent}%)</div>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: ${globalPercent}%"></div>
+      </div>
+    </div>
+
+    ${withProgress.length > 0 ? `
+      <h4 style="font-family: 'Cormorant Garamond', serif; font-size: 18px; color: var(--texte-principal); margin: 24px 0 12px; font-weight: 600; text-align: center;">✦ Sourates en progression</h4>
+      <div class="memorized-list">
+        ${withProgress.map(s => `
+          <div class="memorized-card ${s.percent === 100 ? 'complete' : ''}">
+            <div class="memorized-card-header" onclick="toggleMemorizedDetail(${s.number})">
+              <div class="memorized-card-info">
+                <div class="memorized-card-name">${s.englishName}</div>
+                <div class="memorized-card-sub">${s.memVerses.length} / ${s.numberOfAyahs} versets · ${s.englishNameTranslation}</div>
+              </div>
+              <div class="memorized-card-actions">
+                <div class="memorized-card-percent">${s.percent}%</div>
+                <span class="memorized-card-arrow" id="arrow-${s.number}">▾</span>
+              </div>
+            </div>
+            <div class="memorized-card-bar">
+              <div class="memorized-card-bar-fill" style="width: ${s.percent}%"></div>
+            </div>
+            <div class="memorized-card-detail" id="detail-${s.number}">
+              <div class="memorized-detail-content">
+                <div class="memorized-detail-title">Versets mémorisés :</div>
+                <div class="memorized-verses-list">
+                  ${s.memVerses.map(v => `
+                    <span class="verse-pill" onclick="event.stopPropagation(); openSurah(${s.number});">
+                      ${v}
+                    </span>
+                  `).join('')}
+                </div>
+                <button class="open-surah-link" onclick="openSurah(${s.number})">Ouvrir cette sourate →</button>
+              </div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    ` : `
+      <div class="empty-state" style="margin-top: 24px;">
+        <div class="icon">❀</div>
+        <p>Aucune sourate en cours de mémorisation.<br>Ouvre une sourate en mode Mémorisation et coche les versets que tu connais.</p>
+      </div>
+    `}
+  `;
+}
+
+function toggleMemorizedDetail(surahNum) {
+  const detail = document.getElementById(`detail-${surahNum}`);
+  const arrow = document.getElementById(`arrow-${surahNum}`);
+  if (detail) {
+    const isOpen = detail.classList.toggle('open');
+    if (arrow) arrow.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
+  }
+}
+
+function renderTodoSection() {
+  const container = document.getElementById('progSection-todo');
+  const categories = [
+    { key: 'revoir', title: 'À revoir', icon: '↻' },
+    { key: 'incomprehensions', title: 'Incompréhensions', icon: '?' },
+    { key: 'questions', title: 'Questions', icon: '✎' }
+  ];
+
+  container.innerHTML = `
+    <div class="todo-categories">
+      ${categories.map(cat => {
+        const items = todoData[cat.key] || [];
+        const remaining = items.filter(i => !i.done).length;
+        return `
+          <div class="todo-category">
+            <div class="todo-category-header">
+              <div class="todo-category-icon">${cat.icon}</div>
+              <div class="todo-category-title">${cat.title}</div>
+              <div class="todo-category-count">${remaining}</div>
+            </div>
+            <div class="todo-list">
+              ${items.length === 0 ? `
+                <div style="font-size: 13px; color: var(--texte-sous); font-style: italic; text-align: center; padding: 16px 0;">Aucun élément pour le moment</div>
+              ` : items.map(item => `
+                <div class="todo-item ${item.done ? 'done' : ''}">
+                  <div class="todo-item-check" onclick="toggleTodoItem('${cat.key}', '${item.id}')"></div>
+                  <div class="todo-text">${escapeHTML(item.text)}</div>
+                  <button class="todo-delete" onclick="deleteTodoItem('${cat.key}', '${item.id}')">✕</button>
+                </div>
+              `).join('')}
+            </div>
+            <div class="todo-add-form">
+              <input type="text" class="todo-add-input" id="todoInput-${cat.key}" placeholder="Ajouter..." onkeydown="if(event.key==='Enter') addTodoItem('${cat.key}')">
+              <button class="todo-add-btn" onclick="addTodoItem('${cat.key}')" title="Ajouter">+</button>
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+function escapeHTML(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+function addTodoItem(catKey) {
+  const input = document.getElementById(`todoInput-${catKey}`);
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
+  if (!todoData[catKey]) todoData[catKey] = [];
+  todoData[catKey].push({
+    id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+    text: text,
+    done: false
+  });
+  localStorage.setItem('nour_todo', JSON.stringify(todoData));
+  input.value = '';
+  renderTodoSection();
+}
+
+function toggleTodoItem(catKey, itemId) {
+  const item = (todoData[catKey] || []).find(i => i.id === itemId);
+  if (item) {
+    item.done = !item.done;
+    localStorage.setItem('nour_todo', JSON.stringify(todoData));
+    renderTodoSection();
+  }
+}
+
+function deleteTodoItem(catKey, itemId) {
+  todoData[catKey] = (todoData[catKey] || []).filter(i => i.id !== itemId);
+  localStorage.setItem('nour_todo', JSON.stringify(todoData));
+  renderTodoSection();
+}
+
+// Helper : obtenir le lundi de la semaine d'une date
+function getMonday(date) {
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  d.setHours(0, 0, 0, 0);
+  return new Date(d.setDate(diff));
+}
+
+function formatDateKey(date) {
+  return date.toISOString().split('T')[0]; // YYYY-MM-DD
+}
+
+function formatWeekRange(monday) {
+  const sunday = new Date(monday);
+  sunday.setDate(sunday.getDate() + 6);
+  const opts = { day: 'numeric', month: 'long' };
+  return `Du ${monday.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })} au ${sunday.toLocaleDateString('fr-FR', opts)}`;
+}
+
+let currentWeekMonday = getMonday(new Date());
+
+function renderSemainierSection() {
+  const container = document.getElementById('progSection-semainier');
+  const dayNames = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+  const todayKey = formatDateKey(new Date());
+
+  // Construire les 7 dates de la semaine
+  const weekDates = [];
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(currentWeekMonday);
+    d.setDate(d.getDate() + i);
+    weekDates.push(d);
+  }
+
+  // Heures affichées (6h - 23h)
+  const startHour = 6;
+  const endHour = 23;
+
+  // Récupérer les événements de cette semaine
+  const events = semainierData.events || [];
+
+  container.innerHTML = `
+    <div class="calendar-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <button class="hide-btn" onclick="navigateWeek(-1)" title="Semaine précédente">←</button>
+        <div class="calendar-week-label">${formatWeekRange(currentWeekMonday)}</div>
+        <button class="hide-btn" onclick="navigateWeek(1)" title="Semaine suivante">→</button>
+        <button class="hide-btn" onclick="goToToday()" title="Cette semaine">Aujourd'hui</button>
+      </div>
+      <button class="calendar-add-btn" onclick="openSlotModal()">＋ Nouveau créneau</button>
+    </div>
+    <div class="calendar-grid">
+      <table class="calendar-table">
+        <thead>
+          <tr>
+            <th class="hour-col"></th>
+            ${weekDates.map((d, i) => {
+              const dateKey = formatDateKey(d);
+              const isToday = dateKey === todayKey;
+              return `<th class="${isToday ? 'today-col' : ''}">${dayNames[i]}<br><span style="font-family:'Cormorant Garamond',serif; font-size:11px; font-weight:400; color:var(--texte-doux); letter-spacing:0;">${d.getDate()}</span></th>`;
+            }).join('')}
+          </tr>
+        </thead>
+        <tbody>
+          ${Array.from({ length: endHour - startHour + 1 }, (_, idx) => {
+            const h = startHour + idx;
+            return `
+              <tr>
+                <td class="hour-cell">${h.toString().padStart(2, '0')}h</td>
+                ${weekDates.map(d => {
+                  const dateKey = formatDateKey(d);
+                  const cellEvents = events.filter(e => e.date === dateKey && parseInt(e.startTime.split(':')[0]) === h);
+                  return `
+                    <td class="day-cell" onclick="openSlotModal('${dateKey}', ${h})">
+                      ${cellEvents.map(ev => {
+                        const [sH, sM] = ev.startTime.split(':').map(Number);
+                        const heightPx = (ev.duration / 60) * 40;
+                        const offsetPx = (sM / 60) * 40;
+                        const surahLabel = ev.surahName ? ` · ${ev.surahName}` : '';
+                        return `<div class="calendar-event" style="top: ${offsetPx}px; height: ${heightPx}px;" onclick="event.stopPropagation(); openSlotModal('${ev.date}', null, '${ev.id}')">
+                          <div class="calendar-event-title">${escapeHTML(ev.title)}</div>
+                          <div class="calendar-event-meta">${ev.startTime}${surahLabel}</div>
+                        </div>`;
+                      }).join('')}
+                    </td>
+                  `;
+                }).join('')}
+              </tr>
+            `;
+          }).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function navigateWeek(direction) {
+  currentWeekMonday.setDate(currentWeekMonday.getDate() + direction * 7);
+  renderSemainierSection();
+}
+
+function goToToday() {
+  currentWeekMonday = getMonday(new Date());
+  renderSemainierSection();
+}
+
+// Modale création / édition de créneau
+function openSlotModal(dateStr, hour, eventId) {
+  const isEdit = !!eventId;
+  const event = isEdit ? (semainierData.events || []).find(e => e.id === eventId) : null;
+
+  const defaultDate = dateStr || formatDateKey(new Date());
+  const defaultTime = hour != null ? `${hour.toString().padStart(2, '0')}:00` : '08:00';
+
+  // S'assurer que les sourates sont chargées pour le sélecteur
+  if (allSurahs.length === 0) {
+    loadSurahs().then(() => openSlotModal(dateStr, hour, eventId));
+    return;
+  }
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.id = 'slotModal';
+  overlay.innerHTML = `
+    <div class="modal-card">
+      <h3>${isEdit ? 'Modifier le créneau' : 'Nouveau créneau'}</h3>
+      <div class="form-field">
+        <label>Titre</label>
+        <input type="text" id="slotTitle" placeholder="Ex : Révision Al-Mulk" value="${escapeHTML(event?.title || '')}">
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Date</label>
+          <input type="date" id="slotDate" value="${event?.date || defaultDate}">
+        </div>
+        <div class="form-field">
+          <label>Heure</label>
+          <input type="time" id="slotTime" value="${event?.startTime || defaultTime}">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Durée (minutes)</label>
+          <input type="number" id="slotDuration" min="5" max="480" step="5" value="${event?.duration || 30}">
+        </div>
+        <div class="form-field">
+          <label>Sourate liée</label>
+          <select id="slotSurah">
+            <option value="">— Aucune —</option>
+            ${allSurahs.map(s => `<option value="${s.number}" data-name="${s.englishName}" ${event?.surahNumber == s.number ? 'selected' : ''}>${s.number}. ${s.englishName}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Notes</label>
+        <textarea id="slotNotes" placeholder="Versets à réviser, points à travailler...">${escapeHTML(event?.notes || '')}</textarea>
+      </div>
+      <div class="modal-actions">
+        ${isEdit ? `<button class="modal-btn modal-btn-danger" onclick="deleteSlot('${eventId}')">Supprimer</button>` : ''}
+        <button class="modal-btn modal-btn-secondary" onclick="closeSlotModal()">Annuler</button>
+        <button class="modal-btn modal-btn-primary" onclick="saveSlot(${isEdit ? `'${eventId}'` : 'null'})">${isEdit ? 'Mettre à jour' : 'Créer'}</button>
+      </div>
+    </div>
+  `;
+  overlay.onclick = (e) => { if (e.target === overlay) closeSlotModal(); };
+  document.body.appendChild(overlay);
+}
+
+function closeSlotModal() {
+  const m = document.getElementById('slotModal');
+  if (m) m.remove();
+}
+
+function saveSlot(eventId) {
+  const title = document.getElementById('slotTitle').value.trim();
+  const date = document.getElementById('slotDate').value;
+  const startTime = document.getElementById('slotTime').value;
+  const duration = parseInt(document.getElementById('slotDuration').value) || 30;
+  const surahSelect = document.getElementById('slotSurah');
+  const surahNumber = surahSelect.value || null;
+  const surahName = surahNumber ? surahSelect.options[surahSelect.selectedIndex].dataset.name : null;
+  const notes = document.getElementById('slotNotes').value.trim();
+
+  if (!title) {
+    showNotification('Le titre est obligatoire ✦');
+    return;
+  }
+  if (!date || !startTime) {
+    showNotification('Date et heure obligatoires');
+    return;
+  }
+
+  if (!semainierData.events) semainierData.events = [];
+
+  if (eventId) {
+    const idx = semainierData.events.findIndex(e => e.id === eventId);
+    if (idx !== -1) {
+      semainierData.events[idx] = { id: eventId, title, date, startTime, duration, surahNumber, surahName, notes };
+    }
+  } else {
+    const newId = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    semainierData.events.push({ id: newId, title, date, startTime, duration, surahNumber, surahName, notes });
+  }
+  localStorage.setItem('nour_semainier', JSON.stringify(semainierData));
+  closeSlotModal();
+  renderSemainierSection();
+  showNotification(eventId ? 'Créneau mis à jour ✦' : 'Créneau ajouté ❀');
+}
+
+function deleteSlot(eventId) {
+  if (!confirm('Supprimer ce créneau ?')) return;
+  semainierData.events = (semainierData.events || []).filter(e => e.id !== eventId);
+  localStorage.setItem('nour_semainier', JSON.stringify(semainierData));
+  closeSlotModal();
+  renderSemainierSection();
+  showNotification('Créneau supprimé');
+}
+
+// ========== CACHE ==========
+function saveCache() {
+  try {
+    localStorage.setItem('nour_cache', JSON.stringify(cache));
+  } catch (e) {
+    cache = {};
+    localStorage.removeItem('nour_cache');
+  }
+}
+
+// ========== INITIALISATION ==========
+async function loadQulData() {
+  try {
+    const [tafsirFr, surahInfo, husaryAudio] = await Promise.all([
+      fetch(QUL_FILES.tafsirFr).then(r => r.json()).catch(() => null),
+      fetch(QUL_FILES.surahInfo).then(r => r.json()).catch(() => null),
+      fetch(QUL_FILES.husaryAudio).then(r => r.json()).catch(() => null)
+    ]);
+    qulData.tafsirFr = tafsirFr;
+    qulData.surahInfo = surahInfo;
+    qulData.husaryAudio = husaryAudio;
+  } catch (e) {
+    // Si erreur, l'app fonctionne quand même sans les ressources QUL
+  }
+}
+
+(async function init() {
+  document.body.classList.add('show-footer');
+  await loadQulData();
+  loadSurahs();
+})();
+</script>
+
+</body>
+</html>
